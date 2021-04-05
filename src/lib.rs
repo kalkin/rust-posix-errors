@@ -13,7 +13,6 @@ pub struct PosixError {
     message: String,
 }
 
-
 /// Operation not permitted
 pub const EPERM: i32 = 1;
 /// No such file or directory
@@ -213,7 +212,6 @@ pub const EOWNERDEAD: i32 = 96;
 /// Must be equal largest errno
 pub const ELAST: i32 = 96;
 
-
 impl fmt::Display for PosixError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         return write!(f, "{}", self.message);
@@ -223,140 +221,102 @@ impl fmt::Display for PosixError {
 impl PosixError {
     /// Create a new [PosixError]
     pub fn new(code: i32, message: String) -> PosixError {
-        return PosixError {
-            code: code,
-            message: message,
-        };
+        PosixError { code, message }
     }
 
     /// Return the posix error code
     pub fn code(&self) -> i32 {
-        return self.code;
+        self.code
     }
 
     /// Return the error message
     pub fn message(&self) -> String {
-        return self.message.clone();
+        self.message.clone()
     }
 }
 
 /// Convert [std::io::Error] to a [PosixError]
 pub fn to_posix_error(err: std::io::Error) -> PosixError {
     match err.kind() {
-        ErrorKind::NotFound => {
-            return PosixError {
-                code: ENOENT,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::PermissionDenied => {
-            return PosixError {
-                code: EACCES,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::ConnectionRefused => {
-            return PosixError {
-                code: ECONNREFUSED,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::ConnectionReset => {
-            return PosixError {
-                code: ECONNRESET,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::ConnectionAborted => {
-            return PosixError {
-                code: ECONNABORTED,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::NotConnected => {
-            return PosixError {
-                code: ENOTCONN,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::AddrInUse => {
-            return PosixError {
-                code: EADDRINUSE,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::AddrNotAvailable => {
-            return PosixError {
-                code: EADDRNOTAVAIL,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::BrokenPipe => {
-            return PosixError {
-                code: EPIPE,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::AlreadyExists => {
-            return PosixError {
-                code: EEXIST,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::WouldBlock => {
-            return PosixError {
-                code: EWOULDBLOCK,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::InvalidInput => {
-            return PosixError {
-                code: EINVAL,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::InvalidData => {
-            return PosixError {
-                code: EFTYPE,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::TimedOut => {
-            return PosixError {
-                code: ETIMEDOUT,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::WriteZero => {
-            return PosixError {
-                code: ENOLINK,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::Interrupted => {
-            return PosixError {
-                code: EINTR,
-                message: err.to_string(),
-            }
-        }
-        ErrorKind::UnexpectedEof => {
-            return PosixError {
-                code: ESHUTDOWN,
-                message: err.to_string(),
-            }
-        }
-        _ => {
-            return PosixError {
-                code: EPERM,
-                message: err.to_string(),
-            }
-        }
-    };
+        ErrorKind::NotFound => PosixError {
+            code: ENOENT,
+            message: err.to_string(),
+        },
+        ErrorKind::PermissionDenied => PosixError {
+            code: EACCES,
+            message: err.to_string(),
+        },
+        ErrorKind::ConnectionRefused => PosixError {
+            code: ECONNREFUSED,
+            message: err.to_string(),
+        },
+
+        ErrorKind::ConnectionReset => PosixError {
+            code: ECONNRESET,
+            message: err.to_string(),
+        },
+        ErrorKind::ConnectionAborted => PosixError {
+            code: ECONNABORTED,
+            message: err.to_string(),
+        },
+        ErrorKind::NotConnected => PosixError {
+            code: ENOTCONN,
+            message: err.to_string(),
+        },
+        ErrorKind::AddrInUse => PosixError {
+            code: EADDRINUSE,
+            message: err.to_string(),
+        },
+        ErrorKind::AddrNotAvailable => PosixError {
+            code: EADDRNOTAVAIL,
+            message: err.to_string(),
+        },
+        ErrorKind::BrokenPipe => PosixError {
+            code: EPIPE,
+            message: err.to_string(),
+        },
+        ErrorKind::AlreadyExists => PosixError {
+            code: EEXIST,
+            message: err.to_string(),
+        },
+        ErrorKind::WouldBlock => PosixError {
+            code: EWOULDBLOCK,
+            message: err.to_string(),
+        },
+        ErrorKind::InvalidInput => PosixError {
+            code: EINVAL,
+            message: err.to_string(),
+        },
+        ErrorKind::InvalidData => PosixError {
+            code: EFTYPE,
+            message: err.to_string(),
+        },
+        ErrorKind::TimedOut => PosixError {
+            code: ETIMEDOUT,
+            message: err.to_string(),
+        },
+        ErrorKind::WriteZero => PosixError {
+            code: ENOLINK,
+            message: err.to_string(),
+        },
+        ErrorKind::Interrupted => PosixError {
+            code: EINTR,
+            message: err.to_string(),
+        },
+        ErrorKind::UnexpectedEof => PosixError {
+            code: ESHUTDOWN,
+            message: err.to_string(),
+        },
+        _ => PosixError {
+            code: EPERM,
+            message: err.to_string(),
+        },
+    }
 }
 
 /// Return a [PosixError] from a failed [std::process::Output]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
     assert!(!output.status.success());
     let tmp = String::from_utf8(output.stderr).unwrap();
-    return PosixError::new(output.status.code().unwrap(), tmp);
+    PosixError::new(output.status.code().unwrap(), tmp)
 }
