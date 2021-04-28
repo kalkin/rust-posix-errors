@@ -298,6 +298,14 @@ impl From<std::io::Error> for PosixError {
     }
 }
 
+impl From<std::process::Output> for PosixError {
+    fn from(output: std::process::Output) -> Self {
+        assert!(!output.status.success());
+        let tmp = String::from_utf8(output.stderr).unwrap();
+        PosixError::new(output.status.code().unwrap(), tmp)
+    }
+}
+
 impl PosixError {
     /// Create a new [`PosixError`]
     #[must_use]
@@ -329,7 +337,5 @@ pub fn to_posix_error(err: std::io::Error) -> PosixError {
 /// Return a [`PosixError`] from a failed [`std::process::Output`]
 #[must_use]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
-    assert!(!output.status.success());
-    let tmp = String::from_utf8(output.stderr).unwrap();
-    PosixError::new(output.status.code().unwrap(), tmp)
+    PosixError::from(output)
 }
