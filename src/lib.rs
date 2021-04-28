@@ -219,7 +219,7 @@ impl fmt::Display for PosixError {
 }
 
 impl PosixError {
-    /// Create a new [PosixError]
+    /// Create a new [`PosixError`]
     pub fn new(code: i32, message: String) -> PosixError {
         PosixError { code, message }
     }
@@ -235,7 +235,7 @@ impl PosixError {
     }
 }
 
-/// Convert [std::io::Error] to a [PosixError]
+/// Convert [`std::io::Error`] to a [`PosixError`]
 pub fn to_posix_error(err: std::io::Error) -> PosixError {
     match err.kind() {
         ErrorKind::NotFound => PosixError {
@@ -314,7 +314,7 @@ pub fn to_posix_error(err: std::io::Error) -> PosixError {
     }
 }
 
-/// Return a [PosixError] from a failed [std::process::Output]
+/// Return a [`PosixError`] from a failed [`std::process::Output`]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
     assert!(!output.status.success());
     let tmp = String::from_utf8(output.stderr).unwrap();
