@@ -316,7 +316,8 @@ impl PosixError {
 }
 
 /// Convert [`std::io::Error`] to a [`PosixError`]
-#[allow(clippy::needless_pass_by_value)] // will be fixed in v2.0.0
+#[allow(clippy::needless_pass_by_value)]
+#[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
 pub fn to_posix_error(err: std::io::Error) -> PosixError {
     PosixError::from(err)
 }
