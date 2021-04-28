@@ -300,16 +300,19 @@ impl From<std::io::Error> for PosixError {
 
 impl PosixError {
     /// Create a new [`PosixError`]
+    #[must_use]
     pub fn new(code: i32, message: String) -> PosixError {
         PosixError { code, message }
     }
 
     /// Return the posix error code
+    #[must_use]
     pub fn code(&self) -> i32 {
         self.code
     }
 
     /// Return the error message
+    #[must_use]
     pub fn message(&self) -> String {
         self.message.clone()
     }
@@ -318,11 +321,13 @@ impl PosixError {
 /// Convert [`std::io::Error`] to a [`PosixError`]
 #[allow(clippy::needless_pass_by_value)]
 #[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
+#[must_use]
 pub fn to_posix_error(err: std::io::Error) -> PosixError {
     PosixError::from(err)
 }
 
 /// Return a [`PosixError`] from a failed [`std::process::Output`]
+#[must_use]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
     assert!(!output.status.success());
     let tmp = String::from_utf8(output.stderr).unwrap();
