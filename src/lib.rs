@@ -336,6 +336,7 @@ pub fn to_posix_error(err: std::io::Error) -> PosixError {
 
 /// Return a [`PosixError`] from a failed [`std::process::Output`]
 #[must_use]
+#[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
     PosixError::from(output)
 }
