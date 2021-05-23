@@ -21,7 +21,7 @@ pub const ENOENT: i32 = 2;
 pub const ESRCH: i32 = 3;
 /// Interrupted system call
 pub const EINTR: i32 = 4;
-///  Input/utput error
+///  Input/output error
 pub const EIO: i32 = 5;
 /// Device not configured
 pub const ENXIO: i32 = 6;
