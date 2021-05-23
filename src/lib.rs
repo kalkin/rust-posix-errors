@@ -212,6 +212,21 @@ pub const EOWNERDEAD: i32 = 96;
 /// Must be equal largest errno
 pub const ELAST: i32 = 96;
 
+/// # Bash error codes
+/// Uses the range 126-165
+
+/// Command invoked cannot execute
+pub const ENOTEXEC: i32 = 126;
+
+/// Command not found
+pub const ENOCMD: i32 = 127;
+
+/// Invalid argument to exit
+pub const EINVALEXIT: i32 = 128;
+
+/// Terminated by CTRL-C
+pub const ECTRLC: i32 = 130;
+
 impl fmt::Display for PosixError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         return write!(f, "{}", self.message);
