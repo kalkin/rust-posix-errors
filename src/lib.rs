@@ -227,6 +227,11 @@ pub const EINVALEXIT: i32 = 128;
 /// Terminated by CTRL-C
 pub const ECTRLC: i32 = 130;
 
+/// # My custom errors
+
+/// UTF8 decode/encode error
+pub const EUTF8: i32 = 166;
+
 impl fmt::Display for PosixError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         return write!(f, "{}", self.message);
