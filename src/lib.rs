@@ -7,7 +7,7 @@ use std::fmt;
 use std::io::ErrorKind;
 
 /// Struct containing a posix error code and an error message
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct PosixError {
     code: i32,
     message: String,
