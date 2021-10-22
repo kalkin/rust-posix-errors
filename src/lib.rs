@@ -346,6 +346,11 @@ impl PosixError {
     }
 }
 
+#[must_use]
+pub fn posix_error(code: i32, msg: &str) -> PosixError {
+    PosixError::new(code, msg.to_string())
+}
+
 /// Convert [`std::io::Error`] to a [`PosixError`]
 #[allow(clippy::needless_pass_by_value)]
 #[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
