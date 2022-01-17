@@ -320,9 +320,13 @@ impl From<std::io::Error> for PosixError {
 
 impl From<std::process::Output> for PosixError {
     fn from(output: std::process::Output) -> Self {
-        assert!(!output.status.success());
-        let tmp = String::from_utf8(output.stderr).unwrap();
-        PosixError::new(output.status.code().unwrap(), tmp)
+        let tmp = String::from_utf8_lossy(&output.stderr).to_string();
+        let mut code = output.status.code().unwrap_or(1);
+        if code == 0 {
+            // This should not happen, but who knows.
+            code = 1;
+        }
+        PosixError::new(code, tmp)
     }
 }
 
