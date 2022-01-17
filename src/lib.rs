@@ -241,76 +241,76 @@ impl fmt::Display for PosixError {
 impl From<std::io::Error> for PosixError {
     fn from(error: std::io::Error) -> Self {
         match error.kind() {
-            ErrorKind::NotFound => PosixError {
+            ErrorKind::NotFound => Self {
                 code: ENOENT,
                 message: error.to_string(),
             },
-            ErrorKind::PermissionDenied => PosixError {
+            ErrorKind::PermissionDenied => Self {
                 code: EACCES,
                 message: error.to_string(),
             },
-            ErrorKind::ConnectionRefused => PosixError {
+            ErrorKind::ConnectionRefused => Self {
                 code: ECONNREFUSED,
                 message: error.to_string(),
             },
 
-            ErrorKind::ConnectionReset => PosixError {
+            ErrorKind::ConnectionReset => Self {
                 code: ECONNRESET,
                 message: error.to_string(),
             },
-            ErrorKind::ConnectionAborted => PosixError {
+            ErrorKind::ConnectionAborted => Self {
                 code: ECONNABORTED,
                 message: error.to_string(),
             },
-            ErrorKind::NotConnected => PosixError {
+            ErrorKind::NotConnected => Self {
                 code: ENOTCONN,
                 message: error.to_string(),
             },
-            ErrorKind::AddrInUse => PosixError {
+            ErrorKind::AddrInUse => Self {
                 code: EADDRINUSE,
                 message: error.to_string(),
             },
-            ErrorKind::AddrNotAvailable => PosixError {
+            ErrorKind::AddrNotAvailable => Self {
                 code: EADDRNOTAVAIL,
                 message: error.to_string(),
             },
-            ErrorKind::BrokenPipe => PosixError {
+            ErrorKind::BrokenPipe => Self {
                 code: EPIPE,
                 message: error.to_string(),
             },
-            ErrorKind::AlreadyExists => PosixError {
+            ErrorKind::AlreadyExists => Self {
                 code: EEXIST,
                 message: error.to_string(),
             },
-            ErrorKind::WouldBlock => PosixError {
+            ErrorKind::WouldBlock => Self {
                 code: EWOULDBLOCK,
                 message: error.to_string(),
             },
-            ErrorKind::InvalidInput => PosixError {
+            ErrorKind::InvalidInput => Self {
                 code: EINVAL,
                 message: error.to_string(),
             },
-            ErrorKind::InvalidData => PosixError {
+            ErrorKind::InvalidData => Self {
                 code: EFTYPE,
                 message: error.to_string(),
             },
-            ErrorKind::TimedOut => PosixError {
+            ErrorKind::TimedOut => Self {
                 code: ETIMEDOUT,
                 message: error.to_string(),
             },
-            ErrorKind::WriteZero => PosixError {
+            ErrorKind::WriteZero => Self {
                 code: ENOLINK,
                 message: error.to_string(),
             },
-            ErrorKind::Interrupted => PosixError {
+            ErrorKind::Interrupted => Self {
                 code: EINTR,
                 message: error.to_string(),
             },
-            ErrorKind::UnexpectedEof => PosixError {
+            ErrorKind::UnexpectedEof => Self {
                 code: ESHUTDOWN,
                 message: error.to_string(),
             },
-            _ => PosixError {
+            _ => Self {
                 code: EPERM,
                 message: error.to_string(),
             },
@@ -326,15 +326,15 @@ impl From<std::process::Output> for PosixError {
             // This should not happen, but who knows.
             code = 1;
         }
-        PosixError::new(code, tmp)
+        Self::new(code, tmp)
     }
 }
 
 impl PosixError {
     /// Create a new [`PosixError`]
     #[must_use]
-    pub fn new(code: i32, message: String) -> PosixError {
-        PosixError { code, message }
+    pub fn new(code: i32, message: String) -> Self {
+        Self { code, message }
     }
 
     /// Return the posix error code
