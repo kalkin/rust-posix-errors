@@ -2,7 +2,7 @@
 name = "posix-errors"
 version = "1.2.0"
 authors = ["Bahtiar `kalkin-` Gadimov <bahtiar@gadimov.de>"]
-edition = "2018"
+edition = "2021"
 license = "Apache-2.0"
 description = "Posix error codes and handy functions for using them."
 repository = "https://github.com/kalkin/rust-posix-errors"
