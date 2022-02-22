@@ -337,14 +337,14 @@ impl PosixError {
     /// Create a new [`PosixError`]
     #[must_use]
     #[inline]
-    pub fn new(code: i32, message: String) -> Self {
+    pub const fn new(code: i32, message: String) -> Self {
         Self { code, message }
     }
 
     /// Return the posix error code
     #[must_use]
     #[inline]
-    pub fn code(&self) -> i32 {
+    pub const fn code(&self) -> i32 {
         self.code
     }
 
