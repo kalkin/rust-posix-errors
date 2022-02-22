@@ -233,7 +233,7 @@ pub const ECTRLC: i32 = 130;
 pub const EUTF8: i32 = 166;
 
 impl fmt::Display for PosixError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         return write!(f, "{}", self.message);
     }
 }
