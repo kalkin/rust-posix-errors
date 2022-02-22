@@ -359,7 +359,7 @@ impl PosixError {
 #[must_use]
 #[inline]
 pub fn posix_error(code: i32, msg: &str) -> PosixError {
-    PosixError::new(code, msg.to_string())
+    PosixError::new(code, msg.to_owned())
 }
 
 /// Convert [`std::io::Error`] to a [`PosixError`]
