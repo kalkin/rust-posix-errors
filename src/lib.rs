@@ -233,12 +233,14 @@ pub const ECTRLC: i32 = 130;
 pub const EUTF8: i32 = 166;
 
 impl fmt::Display for PosixError {
+    #[inline]
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         return write!(f, "{}", self.message);
     }
 }
 
 impl From<std::io::Error> for PosixError {
+    #[inline]
     fn from(error: std::io::Error) -> Self {
         match error.kind() {
             ErrorKind::NotFound => Self {
@@ -319,6 +321,7 @@ impl From<std::io::Error> for PosixError {
 }
 
 impl From<std::process::Output> for PosixError {
+    #[inline]
     fn from(output: std::process::Output) -> Self {
         let tmp = String::from_utf8_lossy(&output.stderr).to_string();
         let mut code = output.status.code().unwrap_or(1);
@@ -333,24 +336,28 @@ impl From<std::process::Output> for PosixError {
 impl PosixError {
     /// Create a new [`PosixError`]
     #[must_use]
+    #[inline]
     pub fn new(code: i32, message: String) -> Self {
         Self { code, message }
     }
 
     /// Return the posix error code
     #[must_use]
+    #[inline]
     pub fn code(&self) -> i32 {
         self.code
     }
 
     /// Return the error message
     #[must_use]
+    #[inline]
     pub fn message(&self) -> String {
         self.message.clone()
     }
 }
 
 #[must_use]
+#[inline]
 pub fn posix_error(code: i32, msg: &str) -> PosixError {
     PosixError::new(code, msg.to_string())
 }
@@ -359,12 +366,14 @@ pub fn posix_error(code: i32, msg: &str) -> PosixError {
 #[allow(clippy::needless_pass_by_value)]
 #[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
 #[must_use]
+#[inline]
 pub fn to_posix_error(err: std::io::Error) -> PosixError {
     PosixError::from(err)
 }
 
 /// Return a [`PosixError`] from a failed [`std::process::Output`]
 #[must_use]
+#[inline]
 #[deprecated(since = "1.1.0", note = "Please use PosixError::from")]
 pub fn error_from_output(output: std::process::Output) -> PosixError {
     PosixError::from(output)
