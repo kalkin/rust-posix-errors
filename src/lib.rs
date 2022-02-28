@@ -356,6 +356,7 @@ impl PosixError {
     }
 }
 
+/// Create new `PosixError`
 #[must_use]
 #[inline]
 pub fn posix_error(code: i32, msg: &str) -> PosixError {
