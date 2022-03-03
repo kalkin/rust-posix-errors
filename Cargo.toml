@@ -1,14 +1,10 @@
 [package]
-name = "posix-errors"
-version = "1.2.0"
-authors = ["Bahtiar `kalkin-` Gadimov <bahtiar@gadimov.de>"]
-edition = "2021"
-license = "Apache-2.0"
-description = "Posix error codes and handy functions for using them."
-repository = "https://github.com/kalkin/rust-posix-errors"
-keywords = ["errors"]
-categories = ["data-structures", "rust-patterns"]
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
+name = 'posix-errors'
+authors = ['Bahtiar `kalkin-` Gadimov <bahtiar@gadimov.de>']
+categories = [ 'data-structures', 'rust-patterns', ]
+description = 'Posix error codes and handy functions for using them.'
+edition = '2021'
+keywords = ['errors']
+license = 'Apache-2.0'
+repository = 'https://github.com/kalkin/rust-posix-errors'
+version = '1.2.0'
