@@ -8,3 +8,5 @@ keywords = ['errors']
 license = 'Apache-2.0'
 repository = 'https://github.com/kalkin/rust-posix-errors'
 version = '1.2.1'
+
+[lib]
