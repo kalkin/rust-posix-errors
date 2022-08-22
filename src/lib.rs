@@ -7,7 +7,7 @@ use std::fmt;
 use std::io::ErrorKind;
 
 /// Struct containing a posix error code and an error message
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PosixError {
     code: i32,
     message: String,
@@ -235,7 +235,7 @@ pub const EUTF8: i32 = 166;
 impl fmt::Display for PosixError {
     #[inline]
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        return write!(f, "{}", self.message);
+        write!(f, "{}", self.message)
     }
 }
 
